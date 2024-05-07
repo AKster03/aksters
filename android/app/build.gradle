@@ -1,0 +1,51 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion "30.0.3"
+    namespace 'com.example.flutter_application_1'
+
+     buildTypes {
+        debug {
+            manifestPlaceholders = [disableManifestMerger: true]
+        }
+     }
+
+    defaultConfig {
+        applicationId "com.example.flutter_application_1"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode localProperties.getProperty('flutter.versionCode').toInteger()
+        versionName localProperties.getProperty('flutter.versionName')
+        
+        // Specify the namespace for the generated R and BuildConfig classes
+        namespace 'com.example.flutter_application_1' // Replace with your desired namespace
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug // Replace with your signing configuration
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+
+}
